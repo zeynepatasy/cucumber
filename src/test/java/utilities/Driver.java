@@ -21,24 +21,23 @@ public class Driver {
     public static WebDriver getDriver() {
 
 
-
         if (driver == null) {
-            switch (ConfigReader.getProperty("browser")){
+            switch (ConfigReader.getProperty("browser")) {
                 case "chrome":
                     WebDriverManager.chromedriver().setup();
                     driver = new ChromeDriver();
                     break;
-                case "safari" :
+                case "safari":
                     WebDriverManager.safaridriver().setup();
-                    driver=new SafariDriver();
+                    driver = new SafariDriver();
                     break;
                 case "headless-chrome":
                     WebDriverManager.chromedriver().setup();
-                        driver=new ChromeDriver(new ChromeOptions().setHeadless(true));
-                        break;
+                    driver = new ChromeDriver(new ChromeOptions().setHeadless(true));
+                    break;
                 case "firefox":
                     WebDriverManager.firefoxdriver().setup();
-                    driver=new FirefoxDriver();
+                    driver = new FirefoxDriver();
                     break;
                 default:
                     WebDriverManager.chromedriver().setup();
@@ -55,9 +54,17 @@ public class Driver {
     }
 
     public static void closeDriver() {
-        if (!(driver == null) ){
+        if (!(driver == null)) {
             driver.close();
-            driver=null; //yukarıda null' eşitse dedğimiz için burda kapatıyoruz
+            driver = null; //yukarıda null' eşitse dedğimiz için burda kapatıyoruz
+        }
+
+    }
+
+    public static void quitDriver() {
+        if (!(driver == null)) {
+            driver.close();
+            driver = null; //yukarıda null' eşitse dedğimiz için burda kapatıyoruz
         }
     }
 }

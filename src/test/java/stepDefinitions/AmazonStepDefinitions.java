@@ -2,7 +2,9 @@ package stepDefinitions;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.junit.Test;
 import org.openqa.selenium.Keys;
 import pages.AmazonPages;
 import utilities.ConfigReader;
@@ -27,7 +29,8 @@ public class AmazonStepDefinitions {
     }
     @Then("sayfayi kapatir")
     public void sayfayi_kapatir() {
-Driver.closeDriver();
+
+        Driver.quitDriver();
     }
     @Then("kullanıcı Java için arama yapar")
     public void kullanıcı_java_için_arama_yapar() {
@@ -40,4 +43,15 @@ Driver.closeDriver();
         String actualSözcük=amazonPages.sonucYazısı.getText();
         Assert.assertTrue(actualSözcük.contains(expectedSözcük));
     }
+    @When("kullanici iphone icin arama yapar")
+    public void kullanici_iphone_icin_arama_yapar() {
+        amazonPages.aramaKutusu.sendKeys("iphone" + Keys.ENTER);
+    }
+    @Then("sonuclarin iphone icerdigini test eder")
+    public void sonuclarin_iphone_icerdigini_test_eder() {
+       String expectedSonuc="iphone";
+       String actualSonuc=amazonPages.sonucYazısı.getText();
+       Assert.assertTrue(actualSonuc.contains(expectedSonuc));
+    }
+
 }
